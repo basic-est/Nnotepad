@@ -30,7 +30,9 @@ public class MainActivity extends AppCompatActivity {
         // ListViewを取得する
         ListView lvMemo = findViewById(R.id.memoList);
 
+        //データベースヘルパーオブジェクトを作成。
         DatabaseHelper helper = new DatabaseHelper(MainActivity.this);
+        //データベースヘルパーオブジェクトからデータベース接続オブジェクトを取得。
         SQLiteDatabase db = helper.getWritableDatabase();
 
         try {
@@ -59,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
         //リストビューにリスナを設定。
         lvMemo.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                // リストビューのItemがタップされた時の処理
                 int _memoId = memoListId.get(position);
                 Intent intent = new Intent(MainActivity.this, BrowseActivity.class);
                 intent.putExtra("MEMO_ID",_memoId);
@@ -67,8 +70,10 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    // 新規登録ボタンが押された時の処理
     public void onClick_MainEntry(View view) {
         Intent intent = new Intent(MainActivity.this, EntryActivity.class);
         startActivity(intent);
     }
 }
+    // 端末の戻るボタンが押された時の処理    // 端末の戻るボタンが押された時の処理
