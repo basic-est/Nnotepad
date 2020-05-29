@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
                 // リストビューのItemがタップされた時の処理
                 int _memoId = memoListId.get(position);
                 Intent intent = new Intent(MainActivity.this, BrowseActivity.class);
-                intent.putExtra("MEMO_ID",_memoId);
+                intent.putExtra("MEMO_ID", _memoId);
                 startActivity(intent);
             }
         });
@@ -75,5 +75,14 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(MainActivity.this, EntryActivity.class);
         startActivity(intent);
     }
+
+    @Override
+    // 端末の戻るボタンが押された時の処理
+    public void onBackPressed() {
+        // Androidのホーム画面に遷移する
+        Intent homeIntent = new Intent(Intent.ACTION_MAIN);
+        homeIntent.addCategory(Intent.CATEGORY_HOME);
+        startActivity(homeIntent);
+
+    }
 }
-    // 端末の戻るボタンが押された時の処理    // 端末の戻るボタンが押された時の処理

@@ -32,7 +32,9 @@ public class BrowseActivity extends AppCompatActivity {
         Intent intent = getIntent();
         _memoId = intent.getIntExtra("MEMO_ID",-1);
 
+        //データベースヘルパーオブジェクトを作成。
         DatabaseHelper helper = new DatabaseHelper(BrowseActivity.this);
+        //データベースヘルパーオブジェクトからデータベース接続オブジェクトを取得。
         SQLiteDatabase db = helper.getWritableDatabase();
 
         try {
@@ -56,6 +58,7 @@ public class BrowseActivity extends AppCompatActivity {
 
     }
 
+    // 編集ボタンが押された時の処理
     public void onClick_btnEditStart(View view) {
         Intent intent = new Intent(BrowseActivity.this, EditActivity.class);
         intent.putExtra("MEMO_ID",_memoId);
@@ -83,12 +86,22 @@ public class BrowseActivity extends AppCompatActivity {
 
         } finally { db.close(); } //データベース接続オブジェクトの解放。
 
+        // 一覧画面へ遷移する
         Intent intent = new Intent(BrowseActivity.this, MainActivity.class);
         startActivity(intent);
     }
 
-    public void onClick_btnBrowseBack(View view)  {
-        finish();
+    // 戻るボタンが押された時の処理
+    public void onClick_btnBrowseBack(View view) {
+        Intent intent = new Intent(BrowseActivity.this, MainActivity.class);
+        startActivity(intent);
+    }
+
+    @Override
+    // 端末の戻るボタンが押された時の処理
+    public void onBackPressed(){
+        Intent intent = new Intent(BrowseActivity.this, MainActivity.class);
+        startActivity(intent);
     }
 
 }
